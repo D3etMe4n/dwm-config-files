@@ -21,8 +21,8 @@ static const int stairdirection     = 1;        /* 0: left-aligned, 1: right-ali
 static const int stairsamesize      = 1;        /* 1 means shrink all the staired windows to the same size */
 #define ICONSIZE 22   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
-static const char *fonts[]          = { "FiraCodeNerdFontMono:weight=regular:size=11:antialias=true:hinting=true" };
-static const char dmenufont[]       = "FiraCodeNerdFontMono:weight=bold:size=11:antialias=true:hinting=true"; 
+static const char *fonts[]          = { "FiraCodeNerdFont:weight=bold:size=11:antialias=true:hinting=true" };
+static const char dmenufont[]       = "FiraCodeNerdFont:weight=bold:size=11:antialias=true:hinting=true"; 
 static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray2, col_gray2 },
 	[SchemeSel]  = { col_cyan, col_gray4,  col_cyan },
