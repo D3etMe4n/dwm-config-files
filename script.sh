@@ -38,7 +38,9 @@ mkdir .dwm
 cp "$HOME"/dwm-config-files/autostart.sh "$HOME"/.dwm/
 cp -r "$HOME"/dwm-config-files/.wallpapers "$HOME"
 
+echo "Copy fonts to fonts directory"
 sudo mkdir -p "/usr/local/share/fonts/"
+sudo cp "$HOME"/dwm-config-files/fonts/* /usr/local/share/fonts/
 
 cd "$HOME/.config" || exit
 sudo git clone https://github.com/pijulius/picom.git
