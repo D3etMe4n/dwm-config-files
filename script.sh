@@ -3,7 +3,7 @@ CONF=$HOME/.config
 SUCKLESS=$HOME/suckless
 
 cd "$HOME" || exit 
-sudo pacman -Sy base-devel xorg-server xorg-xinit libx11 libxinerama libxft libxext libxcb xcb-util-renderutil xcb-util-image pixman dbus libconfig libglvnd pcre libev uthash xorgproto xcb-util meson ninja webkit2gtk dunst pcmanfm flameshot feh brightnessctl pamixer ttf-ubuntu-mono-nerd ttf-jetbrains-mono playerctl imlib2
+sudo pacman -Sy base-devel xorg-server xorg-xinit libx11 libxinerama libxft libxext libxcb xcb-util-renderutil xcb-util-image pixman dbus libconfig libglvnd pcre libev uthash xorgproto xcb-util meson ninja webkit2gtk dunst flameshot feh ttf-ubuntu-mono-nerd ttf-jetbrains-mono imlib2 alacritty
 
 if [ ! -d "$CONF" ];
 then
@@ -37,6 +37,8 @@ cd "$HOME" || exit
 mkdir .dwm
 cp "$HOME"/dwm-config-files/autostart.sh "$HOME"/.dwm/
 cp -r "$HOME"/dwm-config-files/.wallpapers "$HOME"
+
+sudo mkdir -p "/usr/local/share/fonts/"
 
 cd "$HOME/.config" || exit
 sudo git clone https://github.com/pijulius/picom.git
