@@ -3,7 +3,7 @@ CONF=$HOME/.config
 SUCKLESS=$HOME/suckless
 
 cd "$HOME" || exit 
-#sudo pacman -Sy base-devel xorg-server xorg-xinit libx11 libxinerama libxft libxext libxcb xcb-util-renderutil xcb-util-image pixman dbus libconfig libglvnd pcre libev uthash xorgproto xcb-util meson ninja webkit2gtk dunst flameshot feh ttf-ubuntu-mono-nerd ttf-jetbrains-mono imlib2 alacritty
+#sudo pacman -Sy base-devel xorg-server xorg-xinit libx11 libxinerama libxft libxext libxcb xcb-util-renderutil xcb-util-image pixman dbus libconfig libglvnd pcre libev uthash xorgproto xcb-util meson ninja webkit2gtk dunst flameshot feh imlib2 alacritty
 
 if [ ! -d "$CONF" ];
 then
@@ -41,6 +41,10 @@ cp -r "$HOME"/dwm-config-files/.wallpapers "$HOME"
 echo "Copy fonts to fonts directory"
 sudo mkdir -p "/usr/local/share/fonts/"
 sudo cp "$HOME"/dwm-config-files/fonts/* /usr/local/share/fonts/
+
+echo "Copy alacritty config"
+mkdir "$HOME"/.config/alacritty/
+cp "$HOME"/dwm-config-files/alacritty/* "$HOME"/.config/alacritty/
 
 cd "$HOME/.config" || exit
 sudo git clone https://github.com/pijulius/picom.git
