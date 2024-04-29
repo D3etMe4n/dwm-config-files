@@ -11,18 +11,18 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
 static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
-static       int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
+static const unsigned int gappoh    = 5;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 5;       /* vert outer gap between windows and screen edge */
+static       int smartgaps          = 1;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const unsigned int stairpx   = 20;       /* depth of the stairs layout */
 static const int stairdirection     = 1;        /* 0: left-aligned, 1: right-aligned */
 static const int stairsamesize      = 1;        /* 1 means shrink all the staired windows to the same size */
-#define ICONSIZE 18   /* icon size */
+#define ICONSIZE 22   /* icon size */
 #define ICONSPACING 8 /* space between icon and title */
-static const char *fonts[]          = { "JetBrainsMonoNL:weight=bold:size=11:antialias=true:hinting=true" };
-static const char dmenufont[]       = "JetBrainsMonoNL:weight=bold:size=11:antialias=true:hinting=true"; 
+static const char *fonts[]          = { "FiraCodeNerdFontMono:weight=regular:size=11:antialias=true:hinting=true" };
+static const char dmenufont[]       = "FiraCodeNerdFontMono:weight=bold:size=11:antialias=true:hinting=true"; 
 static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray2, col_gray2 },
 	[SchemeSel]  = { col_cyan, col_gray4,  col_cyan },
@@ -34,13 +34,7 @@ static const char *tags[] = { " ", " ", " ", " ",""};
 
 static const Rule rules[] = {
 	/*       class                instance     title         tags mask     isfloating   monitor */
-       {   "Pcmanfm",              NULL,       NULL,         1 << 0,       1,           -1 },
        {   "firefox",              NULL,       NULL,         1 << 1,       0,           -1 },
-       {   "Thorium-browser",      NULL,       NULL,         1 << 1,       0,           -1 },
-       {   "Code",                 NULL,       NULL,         1 << 2,       0,           -1 },
-       {   "TelegramDesktop",      NULL,       NULL,         1 << 3,       1,           -1 },
-       {   "vlc",                  NULL,       NULL,         1 << 0,       1,           -1 },
-       {   "discord",              NULL,       NULL,         1 << 4,       1,           -1 },
 };
 
 /* layout(s) */
@@ -52,10 +46,11 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 #define FORCE_VSPLIT 1  
 #include "vanitygaps.c"
 
+
  static const Layout layouts[] = {
  	/* symbol     arrange function */
-  { "| 󰓍 ",      stairs },
   { "| @ ",      spiral },
+  { "| 󰓍 ",      stairs },
 	{ "| 󰉧 ",      NULL },    
  	{ "| 󰊓 ",      monocle },
  	{ "| [T]",      tile },    
@@ -87,7 +82,7 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 /* commands */
 static const char *dmenucmd[] = { "dmenu_run","-l", "6", "-g","1","-h", "32" "-fn", dmenufont, "-shb", "#cba6f7", "-shf","#585b70", "-nhb", "#1e1e2e", "-nhf","#585b70" ,NULL }; 
-static const char *termcmd[]  = { "st", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
 static const char *brupcmd[]  = { "/home/octagony/.config/suckless/dwm/scripts/brightnessnotifications.sh", "up", NULL };
 static const char *brdowncmd[]  = { "/home/octagony/.config/suckless/dwm/scripts/brightnessnotifications.sh", "down", NULL };
 static const char *upvol[]  = { "/home/octagony/.config/suckless/dwm/scripts/volumenotifications.sh", "up", NULL};
@@ -107,24 +102,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return,                   spawn,             {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return,                   spawn,             {.v = termcmd } },
 	{ MODKEY,                       XK_b,                        togglebar,         {0} },
-	{ 0, 			                     	XF86XK_MonBrightnessUp, 	   spawn, 	          {.v = brupcmd} },
-	{ 0, 			                    	XF86XK_MonBrightnessDown, 	 spawn,           	{.v = brdowncmd} },
-	{ 0, 				                    XF86XK_AudioLowerVolume, 	   spawn,           	{.v = downvol} },
-	{ 0, 				                    XF86XK_AudioRaiseVolume, 	   spawn,           	{.v = upvol} },
-	{ 0, 				                    XF86XK_AudioMute, 		       spawn,           	{.v = mutevol} },
-	{ 0, 				                    XF86XK_AudioPrev,						 spawn,           	{.v = prevtrack} },
-	{ 0, 				                    XF86XK_AudioNext,						 spawn,           	{.v = nexttrack} },
-	{ 0, 				                    XF86XK_AudioPlay,						 spawn,           	{.v = playpausetrack} },
-	{ MOD2KEY|ControlMask, 		      XK_c, 			                 spawn, 	          {.v = configscript} },
-	{ MOD2KEY|ControlMask, 		      XK_m, 			                 spawn, 	          {.v = browserbookmarksscript} },
 	{ MOD2KEY,                      XK_s,                        spawn,      		   	{.v = flameshot} },
 	{ MOD2KEY|ControlMask,          XK_j,                        spawn,             {.v = joshuto} },
 	{ MOD2KEY|ControlMask, 		      XK_Delete, 			             spawn, 	          {.v = powermenu} },
 	{ MOD2KEY|ControlMask,          XK_f,                        spawn,             SHCMD("firefox")},
-	{ MOD2KEY|ControlMask,          XK_t,                        spawn,             SHCMD("telegram-desktop")},
-	{ MOD2KEY|ControlMask,          XK_b,                        spawn,             SHCMD("thorium-browser")},
-	{ MOD2KEY|ControlMask,          XK_p,                				 spawn,             SHCMD("pcmanfm")},
-	{ MOD2KEY|ControlMask,          XK_o,                				 spawn,             SHCMD("obsidian")},
 	{ MODKEY|ShiftMask,             XK_j,                        rotatestack,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_k,                        rotatestack,       {.i = -1 } },
 	{ MODKEY,                       XK_j,                        focusstack,        {.i = +1 } },
