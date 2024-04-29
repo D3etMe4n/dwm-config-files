@@ -4,7 +4,7 @@ static char *font = "JetBrainsMonoNL:size=14:antialias=true:hinting=true";
 static char *font2 = "Roboto Mono for Powerline:pixelsize=12:antialias=true:autohint=true";
 static int borderpx = 2;
 
-static char *shell = "/bin/sh";
+static char *shell = "/bin/zsh";
 char *utmp = NULL;
 /* scroll program: to enable use a string like "scroll" */
 char *scroll = NULL;
